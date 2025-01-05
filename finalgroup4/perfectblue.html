@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>女性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 內嵌樣式同上，省略重複部分 */
+    #recommendations, #reviews {
+      display: none;
+    }
+
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <!-- 搜尋商品 -->
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <!-- 登入鍵 -->
+          
+      <span><a href="shop.html">🛒</a></span>
+      <!-- 購物車 -->
+    </div>
+  </header>
+  <!-- 回首頁 -->
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <!-- 商品區塊 -->
+  <div class="product-container">
+    <!-- 左邊圖片 -->
+    <div class="product-images">
+      <img src="image\photo\S__596582410_0.jpg" alt="Perfect Blue" class="main-image">
+    </div>
+
+    <!-- 右邊資訊 -->
+    <div class="product-details">
+      <h1>Perfect Blue</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <button class="quantity-decrease">-</button>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+        <button class="quantity-increase">+</button>
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下方描述區 -->
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description" class="active">商品描述</a>
+      <a href="#recommendations">使用建議</a>
+      <a href="#reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：葡萄柚、海洋、天竺葵、廣藿香</strong>
+      </p>
+      <p>偶像時期的我散發出清新的葡萄柚香天竺葵的柔軟是螢幕前認為的甜美形象<br>
+        當浸泡在部屋浴缸時一度溺斃在藍色海洋<br>
+        幽暗性感魅惑的廣藿香把自己推向未知的恐懼</p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合夜晚約會、藝術展覽或個人沉思時使用。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★★</span>「真的很喜歡這款香水，而且葡萄柚的味道是淡淡的不會刺鼻。」 - jessie</p>
+        <p><span class="stars">★★★★☆</span>「葡萄柚的清新很有層次，和廣藿香的對比讓香味很耐聞。」 - Mia2115</p>
+        <p><span class="stars">★★★★☆</span>「有一種從純潔到性感的變化，很符合香水的名字。 」- Grace898</p>
+        <p><span class="stars">★★★★★</span>「海洋調的清涼和天竺葵的柔和讓人覺得非常放鬆。 」- Ella44117</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript 功能 -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sizeSelect = document.getElementById('size');
+    const priceElement = document.getElementById('price');
+    const quantityInput = document.getElementById('quantity');
+    const addToCartButton = document.getElementById('add-to-cart');
+    const buyNowButton = document.getElementById('buy-now');
+    const navLinks = document.querySelectorAll('.description-nav a');
+    const sections = document.querySelectorAll('section');
+
+    sizeSelect.addEventListener('change', () => {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const newPrice = selectedOption.getAttribute('data-price');
+      priceElement.textContent = newPrice;
+    });
+
+    addToCartButton.addEventListener('click', function() {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const price = selectedOption.getAttribute('data-price');
+      const size = selectedOption.value;
+      const quantity = quantityInput.value;
+      const image = document.querySelector('.main-image').src;
+
+      const product = {
+        image: image,
+        title: "Perfect Blue",
+        size: size,
+        price: price,
+        quantity: quantity
+      };
+
+      let cart = localStorage.getItem('cart');
+      if (cart) {
+        cart = JSON.parse(cart);
+      } else {
+        cart = [];
+      }
+
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert('商品已加入購物車');
+    });
+
+    buyNowButton.addEventListener('click', function() {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const price = selectedOption.getAttribute('data-price');
+      const size = selectedOption.value;
+      const quantity = quantityInput.value;
+      const image = document.querySelector('.main-image').src;
+
+      const product = {
+        image: image,
+        title: "Perfect Blue",
+        size: size,
+        price: price,
+        quantity: quantity
+      };
+
+      localStorage.setItem('buyNowProduct', JSON.stringify(product));
+      window.location.href = 'order-confirmation.html';
+    });
+
+    // 頁面載入時顯示商品描述
+    showSection('description');
+
+    // 當點擊導航鏈接時切換區塊顯示
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetSection = document.querySelector(link.getAttribute('href'));
+        showSection(targetSection.id);
+      });
+    });
+
+    function showSection(sectionId) {
+      sections.forEach(section => {
+        if (section.id === sectionId) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === sectionId) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+  </script>
+</body>
+</html>

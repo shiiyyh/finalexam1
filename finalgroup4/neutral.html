@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+   section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <!-- 搜尋商品 -->
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <!-- 登入鍵 -->
+          
+      <span><a href="shop.html">🛒</a></span>
+      <!-- 購物車 -->
+  </div>
+  </header>
+  <!-- 回首頁 -->
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <!-- 商品區塊 -->
+  <div class="product-container">
+    <!-- 左邊圖片 -->
+    <div class="product-images">
+      <button onclick="prevImage()">&#60;</button>
+      <img src="image/photo/S__596566021_0.jpg" alt="Happy Together" class="main-image" id="main-image">
+      <button onclick="nextImage()">&#62;</button>
+    </div>
+
+    <!-- 右邊資訊 -->
+    <div class="product-details">
+      <h1 id="product-title">Happy Together</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下方描述區 -->
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description">商品描述</a>
+      <a href="#recommendations" class="toggle-section" data-target="recommendations-content">使用建議</a>
+      <a href="#reviews" class="toggle-section" data-target="reviews-content">評價</a>
+    </nav>
+    <section id="description" style="display: block;">
+  <h2>商品描述</h2>
+  <p id="description-text"></p>
+</section>
+<section id="recommendations-content" style="display: none;">
+  <h2>使用建議</h2>
+  <p id="recommendation-text"></p>
+</section>
+<section id="reviews-content" style="display: none;">
+  <h2>評價</h2>
+  <div id="review-text"></div>
+</section>
+
+<!-- JavaScript 功能 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const products = [
+      {
+            id: 1,
+            image: 'image/photo/S__596566021_0.jpg',
+            title: 'Happy Together',
+            sizes: [
+              { size: '30ml', price: 680 },
+              { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：尤加利、薰衣草、檀木、焚香</strong><br>
+                          尤加利草本香氣帶有一絲若即若離的清涼感。<br>
+                          兩人相約去阿根廷看瀑布，看不懂的地圖卻是場浪漫公路冒險。<br>
+                          薰衣草是讓你狼狽後如家一般的照顧：「原來寂寞的時候，所有的人都一樣。」<br>
+                          答不出來的答錄機，乍洩碎片成了最後記憶中的焚香。`,
+            recommendation: "適合約會、放鬆旅行或冥想時使用。",
+            reviews: [
+              "★★★★☆「噴這款香水都被以為是自帶的香味，很舒服的味道不會刺鼻。」 - qqn<br>" +
+              "★★★★★「一開始的尤加利清涼感很特別，後調檀木讓香味更有深度。」-Leo89821<br>" +
+              "★★★★★「薰衣草和焚香的結合讓人有種被溫暖擁抱的感覺，真的很療癒。」-Anna886<br>" +
+              "★★★★★「帶著這款香去旅行，感覺好像真的進入了一場公路電影。」-Chris0986<br>" +
+              "★★★★★「香氣不濃不淡，持久性剛好，是很低調的陪伴。」-Ivy4315"
+            ]
+          },
+          {
+            id: 2,
+            image: 'image/photo/S__596566022_0.jpg',
+            title: 'Love wins all',
+            sizes: [
+              { size: '30ml', price: 680 },
+              { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：黑櫻桃、香草、皮革、煙草</strong><br>
+                          黑櫻桃代表這世界充滿太多雜訊與偏見，香草點綴的暖甜使缺陷瞬間變成你我完整的存在。<br>
+                          時而恐懼，時而幸福，在生命裡流淌的菸草味。<br>
+                          用強韌的皮革遮住你的眼睛，代替你面對殘酷。<br>
+                          最後的雪松還給了屬於我們彼此的人生四格。`,
+            recommendation: "適合約會、正式場合或特別慶祝活動使用。",
+            reviews: [
+              "★★★★★「這款香味真的很好聞，噴完後自己心情也很愉悅，已經噴完兩瓶走了。」 - 177<br>" +
+              "★★★★★「煙草和皮革的香氣中和了黑櫻桃的甜，非常有個性。」-Eric6921<br>" +
+              "★★★★☆「香草的溫暖讓我覺得很安心，是一款可以陪伴我的香水。」-Maggie343<br>" +
+              "★★★★★「這款味道很中性，男女皆宜，噴上後還被問了幾次用什麼香水。」-James555"
+            ]
+          },
+          {
+            id: 3,
+            image: 'image/photo/S__596566023_0.jpg',
+            title: 'Rain',
+            sizes: [
+              { size: '30ml', price: 680 },
+              { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：絲柏、蘭花、麝香</strong><br>
+                          全白挑高有落地窗的房間，原來今天又下雨了。<br>
+                          聽著 soft indie，感受舒服、寧靜，可以好好聽著細細雨聲，好好睡個午覺的味道。`,
+            recommendation: "適合居家使用、閱讀或午休時噴灑。",
+            reviews: [
+              "★★★★★「我都把它拿來當香氛噴霧使用，味道很舒服！」 - Mark996<br>" +
+              "★★★★★「蘭花香特別柔和，不刺鼻，是一種很輕鬆的氛圍。」-Jeff426<br>" +
+              "★★★★★「麝香的後調真的很柔和，睡前噴在枕頭上也很舒服。」-Karen157"
+            ]
+          },
+          {
+            id: 4,
+            image: 'image/photo/S__596566025_0.jpg',
+            title: 'Summer',
+            sizes: [
+              { size: '30ml', price: 680 },
+              { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：苦橙葉、迷迭香、橙花、木質調</strong><br>
+                          夏天要來了！一切是從妳說「I love the Smiths」的剎那開始。<br>
+                          即便洛杉磯偶爾瀰漫苦橙葉的微苦，但每每回憶起與妳一起逛 Ikea 或唱片行的趣事，<br>
+                          種俏皮打鬧的迷迭香令人難忘。`,
+            recommendation: "適合夏季旅行、戶外活動或輕鬆聚會使用。",
+            reviews: [
+              "★★★★☆「真的是噴完這個就感受到夏天的感覺～很符合我理想中夏天的味道。」 - Rose3602<br>" +
+              "★★★★★「橙花香氣清新又乾淨，真的是專屬夏天的味道。」-Sophie306<br>" +
+              "★★★★☆「雖然叫Summer，但用在春天也很棒，給人愉悅的心情。」-Tina180<br>" +
+              "★★★★★「苦橙葉的微苦平衡了甜美香調，香味層次很豐富。」-Kevin441"
+            ]
+          }
+        ];
+        let currentProductIndex = 0;
+
+
+    function updateProductDetails() {
+        const product = products[currentProductIndex];
+        document.getElementById('product-title').textContent = product.title;
+        document.getElementById('main-image').src = product.image;
+
+        const sizeSelect = document.getElementById('size');
+        sizeSelect.innerHTML = '';
+        product.sizes.forEach(sizeOption => {
+            const option = document.createElement('option');
+            option.value = sizeOption.size;
+            option.textContent = sizeOption.size;
+            option.dataset.price = sizeOption.price;
+            sizeSelect.appendChild(option);
+        });
+
+        updatePrice();
+        updateProductDescription(product);
+    }
+
+    function updatePrice() {
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const newPrice = selectedOption.dataset.price;
+        document.getElementById('price').textContent = newPrice;
+    }
+
+    function updateProductDescription(product) {
+        document.getElementById('description-text').innerHTML = product.description;
+        document.getElementById('recommendation-text').textContent = product.recommendation;
+
+        const reviewText = document.getElementById('review-text');
+        reviewText.innerHTML = product.reviews
+            .map(review => `<p><span class="review-stars">${review.slice(0, 5)}</span><span class="review-text">${review.slice(5)}</span></p>`)
+            .join('');
+    }
+
+    window.prevImage = function() {
+        currentProductIndex = (currentProductIndex - 1 + products.length) % products.length;
+        updateProductDetails();
+    };
+
+    window.nextImage = function() {
+        currentProductIndex = (currentProductIndex + 1) % products.length;
+        updateProductDetails();
+    };
+
+    document.getElementById('size').addEventListener('change', updatePrice);
+
+    document.getElementById('add-to-cart').addEventListener('click', function() {
+        const product = products[currentProductIndex];
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItem = { ...product, size: selectedOption.value, price: selectedOption.dataset.price, quantity };
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('商品已加入購物車');
+    });
+
+    document.getElementById('buy-now').addEventListener('click', function() {
+        const product = products[currentProductIndex];
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const buyNowProduct = { ...product, size: selectedOption.value, price: selectedOption.dataset.price, quantity };
+        localStorage.setItem('buyNowProduct', JSON.stringify(buyNowProduct));
+        window.location.href = 'order-confirmation.html';
+    });
+
+    document.querySelectorAll('.toggle-section').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.dataset.target;
+            const targetSection = document.getElementById(targetId);
+            targetSection.style.display = targetSection.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+
+    // 初始化顯示商品資訊
+    updateProductDetails();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #828281;
+  border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header .logo img {
+  width: 55px; 
+  height: 55px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+
+header .icons {
+  display: flex;
+  gap: 15px;
+}
+
+header .icons span {
+  cursor: pointer;
+}
+
+/* 隱藏的下拉選單 */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  top: 20px; /* 距圖片的距離 */
+  right: 0px;
+  background-color: white;
+  box-shadow: 0px 4px 8px #3C3C3C;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* 下拉選單內部的項目 */
+.dropdown_menu a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown_menu a:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* 滑鼠移到圖片時顯示下拉選單 */
+.dropdown:hover .dropdown_menu {
+  display: block;
+}
+
+.back-home {
+  display: block;
+  margin: 20px #fffaf4;
+  font-size: 16px;
+  background-color: #fffaf4;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fffaf4;
+  margin: 0;
+  padding: 20px;
+}
+
+.cart {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.cart h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.select-item {
+  margin-right: 10px;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.item-spec {
+  font-size: 14px;
+  color: #555;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.cart-summary {
+  text-align: right;
+  margin-top: 20px;
+}
+
+#total-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #aca676;
+}
+
+.buy {
+  background: #aca676;
+  color: #FFFFFF;
+  display: inline-block; /* 讓背景僅限於文字部分 */
+  padding: 5px 40px;
+  border-radius: 10PX; 
+  text-decoration: none;
+}
+
+.buy:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.checkout {
+  padding: 5px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #928c65;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
+
+.checkout:hover {
+  background-color: #696448;
+}

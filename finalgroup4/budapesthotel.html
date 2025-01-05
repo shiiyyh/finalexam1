@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>女性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 預設隱藏「使用建議」與「評價」區塊 */
+    #recommendations, #reviews {
+      display: none;
+    }
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <!-- 搜尋商品 -->
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <!-- 登入鍵 -->
+          
+      <span><a href="shop.html">🛒</a></span>
+      <!-- 購物車 -->
+  </div>
+  </header>
+  <!-- 回首頁 -->
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <!-- 商品區塊 -->
+  <div class="product-container">
+    <!-- 左邊圖片 -->
+    <div class="product-images">
+      <img src="image\photo\S__596566019_0.jpg" alt="Budapest Hotel" class="main-image">
+    </div>
+
+    <!-- 右邊資訊 -->
+    <div class="product-details">
+      <h1>Budapest Hotel</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下方描述區 -->
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description" data-target="description">商品描述</a>
+      <a href="#recommendations" data-target="recommendations">使用建議</a>
+      <a href="#reviews" data-target="reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：甜梨、覆盆子、仙客來、東加豆</strong></p>
+      <p>
+        甜梨為前調 如初見甜點學徒女孩Agatha<br>
+        揉合了仙客來的粉色溫柔<br>
+        東加豆的暖感 是［修女泡芙］兩人過猶不及的純愛微酸的覆盆子點綴所有勇敢又俏皮的角色<br>
+        Budapest Hotel 帶你逃離塵囂一秒進入充滿奇幻而置中的世界
+      </p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合約會、下午茶或浪漫聚會場合使用。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★★</span>「噴這款香水出門都感覺自己變溫柔，完全就是校園劇女主本人。」 - xxxe68</p>
+        <p><span class="stars">★★★★★</span>「甜梨和覆盆子的搭配讓人感覺像進入了童話世界，非常可愛。」 - Lily134</p>
+        <p><span class="stars">★★★★★</span>「東加豆的暖感讓香氣層次更豐富，很適合冬天使用。」 - Emma55</p>
+        <p><span class="stars">★★★★★</span>「甜美又不失成熟的香氣，給人俏皮卻穩重的印象。」 - Sophia168</p>
+        <p><span class="stars">★★★★★</span>「這瓶香水就像是電影的延伸，讓人充滿奇幻感。」 - Kate223</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript 功能 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.description-nav a');
+      const sections = document.querySelectorAll('.product-description section');
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // 移除所有連結的 active 樣式
+          navLinks.forEach(nav => nav.classList.remove('active'));
+          
+          // 隱藏所有區塊
+          sections.forEach(section => section.style.display = 'none');
+
+          // 顯示目標區塊並新增 active 樣式
+          const target = document.getElementById(this.dataset.target);
+          target.style.display = 'block';
+          this.classList.add('active');
+        });
+      });
+
+      // 預設顯示第一個區塊
+      document.getElementById('description').style.display = 'block';
+      navLinks[0].classList.add('active');
+
+      const sizeSelect = document.getElementById('size');
+      const priceElement = document.getElementById('price');
+      const quantityInput = document.getElementById('quantity');
+      const addToCartButton = document.getElementById('add-to-cart');
+      const buyNowButton = document.getElementById('buy-now');
+
+      // 更新價格
+      sizeSelect.addEventListener('change', () => {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const newPrice = selectedOption.getAttribute('data-price');
+        priceElement.textContent = newPrice;
+      });
+
+      // 加入購物車功能
+      addToCartButton.addEventListener('click', function() {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        const size = selectedOption.value;
+        const quantity = quantityInput.value;
+        const image = document.querySelector('.main-image').src;
+
+        const product = {
+          image: image,
+          title: "Budapest Hotel",
+          size: size,
+          price: price,
+          quantity: quantity
+        };
+
+        let cart = localStorage.getItem('cart');
+        if (cart) {
+          cart = JSON.parse(cart);
+        } else {
+          cart = [];
+        }
+
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        alert('商品已加入購物車');
+      });
+
+      // 直接購買功能
+      buyNowButton.addEventListener('click', function() {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        const size = selectedOption.value;
+        const quantity = quantityInput.value;
+        const image = document.querySelector('.main-image').src;
+
+        const product = {
+          image: image,
+          title: "Budapest Hotel",
+          size: size,
+          price: price,
+          quantity: quantity
+        };
+
+        localStorage.setItem('buyNowProduct', JSON.stringify(product));
+        window.location.href = 'order-confirmation.html';
+      });
+    });
+  </script>
+</body>
+</html>

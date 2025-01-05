@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 預設隱藏「使用建議」與「評價」區塊 */
+    #recommendations, #reviews {
+      display: none;
+    }
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="品牌標誌" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <span><a href="shop.html">🛒</a></span>
+    </div>
+  </header>
+
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <div class="product-container">
+    <div class="product-images">
+      <img src="image/photo/S__596566021_0.jpg" alt="Happy Together" class="main-image">
+    </div>
+
+    <div class="product-details">
+      <h1>Happy Together</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description" data-target="description">商品描述</a>
+      <a href="#recommendations" data-target="recommendations">使用建議</a>
+      <a href="#reviews" data-target="reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：尤加利、薰衣草、檀木、焚香</strong></p>
+      <p>尤加利草本香氣帶有一絲若即若離的清涼感。兩人相約去阿根廷看瀑布，看不懂的地圖卻是場浪漫公路冒險。薰衣草是讓你狼狽後如家一般的照顧，「原來寂寞的時候，所有的人都一樣。」答不出來的答錄機，乍洩碎片成了最後記憶中的焚香。</p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合約會、放鬆旅行或冥想時使用。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★☆</span>「噴這款香水都被以為是自帶的香味，很舒服的味道不會刺鼻。」 - qqn</p>
+        <p><span class="stars">★★★★★</span>「一開始的尤加利清涼感很特別，後調檀木讓香味更有深度。」 - Leo89821</p>
+        <p><span class="stars">★★★★★</span>「薰衣草和焚香的結合讓人有種被溫暖擁抱的感覺，真的很療癒。」 - Anna886</p>
+        <p><span class="stars">★★★★★</span>「帶著這款香去旅行，感覺好像真的進入了一場公路電影。」 - Chris0986</p>
+        <p><span class="stars">★★★★★</span>「香氣不濃不淡，持久性剛好，是很低調的陪伴。」 - Ivy4315</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sizeSelect = document.getElementById('size');
+      const priceElement = document.getElementById('price');
+      const quantityInput = document.getElementById('quantity');
+      const addToCartButton = document.getElementById('add-to-cart');
+      const buyNowButton = document.getElementById('buy-now');
+
+      sizeSelect.addEventListener('change', () => {
+        priceElement.textContent = sizeSelect.options[sizeSelect.selectedIndex].dataset.price;
+      });
+
+      function handleAddToCart() {
+        const product = {
+          image: document.querySelector('.main-image').src,
+          title: "Happy Together",
+          size: sizeSelect.value,
+          price: sizeSelect.options[sizeSelect.selectedIndex].dataset.price,
+          quantity: quantityInput.value
+        };
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('商品已加入購物車');
+      }
+
+      function handleBuyNow() {
+        const product = {
+          image: document.querySelector('.main-image').src,
+          title: "Happy Together",
+          size: sizeSelect.value,
+          price: sizeSelect.options[sizeSelect.selectedIndex].dataset.price,
+          quantity: quantityInput.value
+        };
+        localStorage.setItem('buyNowProduct', JSON.stringify(product));
+        window.location.href = 'order-confirmation.html';
+      }
+
+      addToCartButton.addEventListener('click', handleAddToCart);
+      buyNowButton.addEventListener('click', handleBuyNow);
+
+      document.querySelectorAll('.description-nav a').forEach(navLink => {
+        navLink.addEventListener('click', function(event) {
+          event.preventDefault();
+          document.querySelectorAll('.product-description section').forEach(section => {
+            section.style.display = 'none';
+          });
+          document.getElementById(this.dataset.target).style.display = 'block';
+          document.querySelectorAll('.description-nav a').forEach(link => link.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

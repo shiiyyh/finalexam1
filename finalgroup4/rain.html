@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 內嵌樣式 */
+    section {
+      display: none;
+    }
+
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <span class="dropdown">
+        👤
+        <div class="dropdown_menu">
+          <a href="profile.html">會員專區</a>
+          <a href="login.html">註冊/登入</a>
+        </div>
+      </span>
+      <span><a href="shop.html">🛒</a></span>
+    </div>
+  </header>
+
+  <!-- 回首頁 -->
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <!-- 商品區塊 -->
+  <div class="product-container">
+    <!-- 左邊圖片 -->
+    <div class="product-images">
+      <img src="image\photo\S__596566023_0.jpg" alt="Rain" class="main-image">
+    </div>
+
+    <!-- 右邊資訊 -->
+    <div class="product-details">
+      <h1>Rain</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下方描述區 -->
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description" class="active">商品描述</a>
+      <a href="#recommendations">使用建議</a>
+      <a href="#reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：絲柏、蘭花、麝香</strong></p>
+      <p>全白挑高有落地窗的房間，原來今天又下雨了。<br>
+        聽著 soft indie，感受舒服、寧靜，可以好好聽著細細雨聲，好好睡個午覺的味道。</p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合居家使用、閱讀或午休時噴灑。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★★</span>「蘭花香特別柔和，不刺鼻，是一種很輕鬆的氛圍。」-Jeff426</p>
+        <p><span class="stars">★★★★★</span>「我都把它拿來當香氛噴霧使用，味道很舒服！」 - Mark996</p>
+        <p><span class="stars">★★★★★</span>「麝香的後調真的很柔和，睡前噴在枕頭上也很舒服。」-Karen157</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript 功能 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sizeSelect = document.getElementById('size');
+      const priceElement = document.getElementById('price');
+      const quantityInput = document.getElementById('quantity');
+      const addToCartButton = document.getElementById('add-to-cart');
+      const buyNowButton = document.getElementById('buy-now');
+      const navLinks = document.querySelectorAll('.description-nav a');
+      const sections = document.querySelectorAll('section');
+
+      sizeSelect.addEventListener('change', () => {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const newPrice = selectedOption.getAttribute('data-price');
+        priceElement.textContent = newPrice;
+      });
+
+      addToCartButton.addEventListener('click', function() {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        const size = selectedOption.value;
+        const quantity = quantityInput.value;
+        const image = document.querySelector('.main-image').src;
+
+        const product = {
+          image: image,
+          title: "Rain",
+          size: size,
+          price: price,
+          quantity: quantity
+        };
+
+        let cart = localStorage.getItem('cart');
+        if (cart) {
+          cart = JSON.parse(cart);
+        } else {
+          cart = [];
+        }
+
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        alert('商品已加入購物車');
+      });
+
+      buyNowButton.addEventListener('click', function() {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        const size = selectedOption.value;
+        const quantity = quantityInput.value;
+        const image = document.querySelector('.main-image').src;
+
+        const product = {
+          image: image,
+          title: "Rain",
+          size: size,
+          price: price,
+          quantity: quantity
+        };
+
+        localStorage.setItem('buyNowProduct', JSON.stringify(product));
+        window.location.href = 'order-confirmation.html';
+      });
+
+      // 顯示商品描述區塊
+      showSection('description');
+
+      // 切換區塊顯示
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetSection = document.querySelector(link.getAttribute('href'));
+          showSection(targetSection.id);
+        });
+      });
+
+      function showSection(sectionId) {
+        sections.forEach(section => {
+          if (section.id === sectionId) {
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').slice(1) === sectionId) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

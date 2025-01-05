@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 預設隱藏「使用建議」與「評價」區塊 */
+    #recommendations, #reviews {
+      display: none;
+    }
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="image/brand.png" alt="品牌標誌">
+    </div>
+    <div class="icons">
+      <span>
+        <input type="search" placeholder="搜尋關鍵字...">🔍
+      </span>
+      <span class="dropdown">
+        👤
+        <div class="dropdown_menu">
+          <a href="profile.html">會員專區</a>
+          <a href="login.html">註冊/登入</a>
+        </div>
+      </span>
+      <span>
+        <a href="shop.html">🛒</a>
+      </span>
+    </div>
+  </header>
+
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <div class="product-container">
+    <div class="product-images">
+      <img src="image/photo/S__596566022_0.jpg" alt="Love wins all" class="main-image">
+    </div>
+
+    <div class="product-details">
+      <h1>Love wins all</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description">商品描述</a>
+      <a href="#recommendations">使用建議</a>
+      <a href="#reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：黑櫻桃、香草、皮革、煙草</strong></p>
+      <p>
+        黑櫻桃代表這世界充滿太多雜訊與偏見，香草點綴的暖甜使缺陷瞬間變成你我完整的存在。<br>
+        時而恐懼，時而幸福，在生命裡流淌的菸草味。<br>
+        用強韌的皮革遮住你的眼睛，代替你面對殘酷。<br>
+        最後的雪松還給了屬於我們彼此的人生四格。
+      </p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合約會、正式場合或特別慶祝活動使用。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★☆</span>「香草的溫暖讓我覺得很安心，是一款可以陪伴我的香水。」- Maggie343</p>
+        <p><span class="stars">★★★★★</span>「這款香味真的很好聞，噴完後自己心情也很愉悅，已經噴完兩瓶走了。」 - 177</p>
+        <p><span class="stars">★★★★★</span>「煙草和皮革的香氣中和了黑櫻桃的甜，非常有個性。」- Eric6921</p>
+        <p><span class="stars">★★★★★</span>「這款味道很中性，男女皆宜，噴上後還被問了幾次用什麼香水。」- James555</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sizeSelect = document.getElementById('size');
+      const priceElement = document.getElementById('price');
+      const quantityInput = document.getElementById('quantity');
+
+      sizeSelect.addEventListener('change', () => {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        priceElement.textContent = selectedOption.getAttribute('data-price');
+      });
+
+      document.getElementById('add-to-cart').addEventListener('click', () => {
+        handleCartAction('cart', '商品已加入購物車');
+      });
+
+      document.getElementById('buy-now').addEventListener('click', () => {
+        handleCartAction('buyNowProduct', '正在跳轉至購買頁面', true);
+      });
+
+      // 顯示選擇的區塊並隱藏其他區塊
+      const links = document.querySelectorAll('.description-nav a');
+      const sections = document.querySelectorAll('.product-description section');
+      
+      links.forEach(link => {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          // 隱藏所有區塊
+          sections.forEach(section => section.style.display = 'none');
+          links.forEach(link => link.classList.remove('active'));
+          
+          // 顯示點擊的區塊
+          const targetSection = document.querySelector(link.getAttribute('href'));
+          targetSection.style.display = 'block';
+          
+          // 標註活動的連結
+          link.classList.add('active');
+        });
+      });
+
+      // 預設顯示「商品描述」區塊
+      document.querySelector('.description-nav a').click();
+
+      function handleCartAction(storageKey, alertMessage, redirect = false) {
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const product = {
+          image: document.querySelector('.main-image').src,
+          title: "Love wins all",
+          size: selectedOption.value,
+          price: selectedOption.getAttribute('data-price'),
+          quantity: quantityInput.value,
+        };
+
+        if (storageKey === 'cart') {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          cart.push(product);
+          localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+          localStorage.setItem(storageKey, JSON.stringify(product));
+        }
+
+        alert(alertMessage);
+        if (redirect) window.location.href = 'order-confirmation.html';
+      }
+    });
+  </script>
+</body>
+</html>

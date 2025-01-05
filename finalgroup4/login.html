@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員登入/註冊</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="image/brand.png" alt="" /></div>
+        <div class="icons">
+            <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+            <!-- 搜尋商品 -->
+            <span class="dropdown">
+                👤
+                <div class="dropdown_menu">
+                    <a href="profile.html">會員專區</a>
+                    <a href="login.html">註冊/登入</a>
+                </div>
+            </span>
+            <!-- 登入鍵 -->
+                
+            <span><a href="shop.html">🛒</a></span>
+            <!-- 購物車 -->
+        </div>
+    </header>
+
+    <a href="index.html" class="back-home">回首頁</a>
+
+    <div class="biggroup">
+        <div class="tab-container">
+            <div class="tabs">
+                <button id="login-tab" class="active" onclick="showTab('login')">登入</button>
+                <button id="register-tab" onclick="showTab('register')">註冊</button>
+            </div>
+    
+            <div id="login" class="form-container">
+                <div class="social-login">
+                    <button class="line">LINE</button>
+                    <button class="FB">FB</button>
+                </div>
+                <div class="or">-----or-----</div>
+                <div class="form-group">
+                    <input type="email" placeholder="Gmail">
+                </div>
+                <div class="form-group password-toggle">
+                    <input type="password" id="login-password" placeholder="密碼">
+                    <button type="button" onclick="togglePassword('login-password')">顯示</button>
+                </div>
+                <div class="form-group">
+                    <label class="forget">忘記密碼</label>
+                </div>
+                    <button class="login-button">
+                        <a href="profile.html">登入</a>
+                    </button>            
+        </div>
+    
+            <div id="register" class="form-container" style="display: none;">
+                <div class="social-login">
+                    <button class="line">LINE</button>
+                    <button class="FB">FB</button>
+                </div>
+                <div class="or">-----or-----</div>
+                <div class="form-group">
+                    <input type="text" placeholder="姓名">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Gmail">
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="手機號碼">
+                </div>
+                <div class="form-group password-toggle">
+                    <input type="password" id="register-password" placeholder="密碼">
+                    <button type="button" onclick="togglePassword('register-password')">顯示</button>
+                </div>
+                <div class="form-group agreement">
+                    <label><input type="checkbox">同意服務條款</label>
+                </div>
+                    <button class="login-button">
+                        <a href="profile.html">註冊</a>
+                    </button>            
+        </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tab) {
+            document.getElementById('login').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('register').style.display = tab === 'register' ? 'block' : 'none';
+            document.getElementById('login-tab').classList.toggle('active', tab === 'login');
+            document.getElementById('register-tab').classList.toggle('active', tab === 'register');
+        }
+
+        /*密碼顯示*/
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            if (passwordInput) {
+                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            }
+        }
+    </script>
+</body>
+</html>

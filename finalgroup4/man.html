@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>男性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+   section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <!-- 搜尋商品 -->
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <!-- 登入鍵 -->
+          
+      <span><a href="shop.html">🛒</a></span>
+      <!-- 購物車 -->
+  </div>
+  </header>
+  <!-- 回首頁 -->
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <!-- 商品區塊 -->
+  <div class="product-container">
+    <!-- 左邊圖片 -->
+    <div class="product-images">
+      <button onclick="prevImage()">&#60;</button>
+      <img src="image/photo/S__596566024_0.jpg" alt="Amo me stessa" class="main-image" id="main-image">
+      <button onclick="nextImage()">&#62;</button>
+    </div>
+
+    <!-- 右邊資訊 -->
+    <div class="product-details">
+      <h1 id="product-title">Amo me stessa</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下方描述區 -->
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description">商品描述</a>
+      <a href="#recommendations" class="toggle-section" data-target="recommendations-content">使用建議</a>
+      <a href="#reviews" class="toggle-section" data-target="reviews-content">評價</a>
+    </nav>
+    <section id="description" style="display: block;">
+  <h2>商品描述</h2>
+  <p id="description-text"></p>
+</section>
+<section id="recommendations-content" style="display: none;">
+  <h2>使用建議</h2>
+  <p id="recommendation-text"></p>
+</section>
+<section id="reviews-content" style="display: none;">
+  <h2>評價</h2>
+  <div id="review-text"></div>
+</section>
+
+<!-- JavaScript 功能 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const products = [
+        {
+            id: 1,
+            image: 'image/photo/S__596566024_0.jpg',
+            title: 'Amo me stessa',
+            sizes: [
+                { size: '30ml', price: 680 },
+                { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：柚子、茉莉、苔蘚、草</strong><br>
+                          彷彿置身義大利都靈（Turin）這城市清新的柚子與茉莉的點綴蘚苔是意外邂逅的躁動<br>
+                          總有人未經你同意就闖入你的世界阻止不了你對這世界好奇、渴望的同時也懂的好好「愛自己。」`,
+            recommendation:  "適合男性日常使用。",
+            reviews: [
+                "★★★★★ 「噴這款香水讓自己的魅力更加提升。」 - adam",
+                "★★★★☆ 「柚子的清新和茉莉的柔和，帶出一種自然的温暖感。」- Jason2882",
+                "★★★★★ 「苔蘚的微微泥土氣息，讓人覺得踏實又平靜。」- Ethan568",
+                "★★★★★ 「一款充滿正能量的香水，像是在提醒自己要愛自己。」- Daniel911",
+                "★★★★☆ 「草木香氣很適合春夏季節，簡單而純粹。」- Ryan248",
+            ]
+        },
+        {
+            id: 2,
+            image: 'image/photo/S__596582412_0.jpg',
+            title: 'September Robot',
+            sizes: [
+                { size: '30ml', price: 680 },
+                { size: '50ml', price: 880 }
+            ],
+            description: `<strong>香調：沉香木、含羞草、白麝香、雪松</strong><br>
+                           1980年代的曼哈頓<br>
+                           狹小公寓的沉香木勾勒出紐約 最寂寞形狀<br>
+                           含羞草粉嫩的氣息 襯托沒有台詞卻是最深刻的陪伴<br>
+                           「最好的道別是"再見"，卻也是"再也不見"的機器人。」`,
+            recommendation: "男性日常生活、精心約會可使用。",
+            reviews: [
+                "★★★★☆ 「味道不會刺鼻。」 - willy",
+                "★★★★★ 「沉香木和雪松的組合帶來深沉的感覺，很有故事感。」- Andrew589",
+                "★★★★☆ 「白麝香讓整體味道柔和了一些，適合靜謐的夜晚。」- Lucas44115",
+                "★★★★★ 「這款香水像是一個回憶的容器，感覺非常特別。」- Nathan0751",
+                "★★★★☆ 「含羞草的粉嫩氣息為香水增添了些許温暖和希望。」- Alex1221",
+            ]
+        }
+    ];
+
+    let currentProductIndex = 0;
+
+    function updateProductDetails() {
+        const product = products[currentProductIndex];
+        document.getElementById('product-title').textContent = product.title;
+        document.getElementById('main-image').src = product.image;
+
+        const sizeSelect = document.getElementById('size');
+        sizeSelect.innerHTML = '';
+        product.sizes.forEach(sizeOption => {
+            const option = document.createElement('option');
+            option.value = sizeOption.size;
+            option.textContent = sizeOption.size;
+            option.dataset.price = sizeOption.price;
+            sizeSelect.appendChild(option);
+        });
+
+        updatePrice();
+        updateProductDescription(product);
+    }
+
+    function updatePrice() {
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const newPrice = selectedOption.dataset.price;
+        document.getElementById('price').textContent = newPrice;
+    }
+
+    function updateProductDescription(product) {
+        document.getElementById('description-text').innerHTML = product.description;
+        document.getElementById('recommendation-text').textContent = product.recommendation;
+
+        const reviewText = document.getElementById('review-text');
+        reviewText.innerHTML = product.reviews
+            .map(review => `<p><span class="review-stars">${review.slice(0, 5)}</span><span class="review-text">${review.slice(5)}</span></p>`)
+            .join('');
+    }
+
+    window.prevImage = function() {
+        currentProductIndex = (currentProductIndex - 1 + products.length) % products.length;
+        updateProductDetails();
+    };
+
+    window.nextImage = function() {
+        currentProductIndex = (currentProductIndex + 1) % products.length;
+        updateProductDetails();
+    };
+
+    document.getElementById('size').addEventListener('change', updatePrice);
+
+    document.getElementById('add-to-cart').addEventListener('click', function() {
+        const product = products[currentProductIndex];
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItem = { ...product, size: selectedOption.value, price: selectedOption.dataset.price, quantity };
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('商品已加入購物車');
+    });
+
+    document.getElementById('buy-now').addEventListener('click', function() {
+        const product = products[currentProductIndex];
+        const sizeSelect = document.getElementById('size');
+        const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const buyNowProduct = { ...product, size: selectedOption.value, price: selectedOption.dataset.price, quantity };
+        localStorage.setItem('buyNowProduct', JSON.stringify(buyNowProduct));
+        window.location.href = 'order-confirmation.html';
+    });
+
+    document.querySelectorAll('.toggle-section').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.dataset.target;
+            const targetSection = document.getElementById(targetId);
+            targetSection.style.display = targetSection.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.description-nav a'); // 導航連結
+  const sections = document.querySelectorAll('section'); // 商品描述、使用建議、評價等區塊
+
+  // 初始化：顯示第一個區塊
+  showSection('description');
+
+  // 為每個連結綁定點擊事件
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // 防止預設行為（如跳轉頁面）
+      const targetSection = document.querySelector(link.getAttribute('href')); // 取得目標區塊
+      showSection(targetSection.id); // 顯示該區塊
+    });
+  });
+
+  // 顯示指定區塊，隱藏其他區塊
+  function showSection(sectionId) {
+    sections.forEach(section => {
+      // 顯示目標區塊，隱藏其他區塊
+      section.style.display = section.id === sectionId ? 'block' : 'none';
+    });
+
+    // 更新導航連結的狀態
+    navLinks.forEach(link => {
+      // 為當前連結加上 active 類別
+      link.classList.toggle('active', link.getAttribute('href').slice(1) === sectionId);
+    });
+  }
+});
+
+    // 初始化顯示商品資訊
+    updateProductDetails();
+  });
+</script>
+</body>
+</html

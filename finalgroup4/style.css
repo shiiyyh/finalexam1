@@ -1,0 +1,362 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('image/index-bg.jpg') no-repeat center center fixed; /* 背景圖片 */
+  background-size: cover; /* 覆蓋整個頁面 */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #828281;
+  border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+header .logo img {
+  width: 55px; 
+  height: 55px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+
+header .icons {
+  display: flex;
+  gap: 15px;
+}
+
+header .icons span {
+  cursor: pointer;
+}
+
+/* 隱藏的下拉選單 */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  top: 20px; /* 距圖片的距離 */
+  right: 0px;
+  background-color: white;
+  box-shadow: 0px 4px 8px #3C3C3C;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* 下拉選單內部的項目 */
+.dropdown_menu a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown_menu a:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* 滑鼠移到圖片時顯示下拉選單 */
+.dropdown:hover .dropdown_menu {
+  display: block;
+}
+
+.product-info {
+  padding: 20px;
+  text-align: center;
+  background-color: #fffaf4;
+}
+/* 圖片輪播器 */
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+
+/* 按鈕樣式 */
+button {
+  font-size: 1.5rem; /* 調整字體大小 */
+  padding: 15px 30px; /* 增加按鈕的內邊距 */
+  background-color: #f1f1f1; /* 背景顏色為灰色 */
+  color: black; /* 文字顏色為黑色 */
+  border: 2px solid #ccc; /* 灰色邊框 */
+  border-radius: 5px; /* 圓角邊框 */
+  cursor: pointer; /* 鼠標懸停時顯示指標 */
+  transition: background-color 0.3s ease; /* 背景顏色過渡效果 */
+  margin: 0 15px; /* 設置左右間距 */
+}
+
+/* 左右箭頭按鈕 */
+.carousel button {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 8px 10px;
+  font-size: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 40px; /* 設置按鈕間距 */
+}
+
+/* 按鈕位置調整 */
+button:nth-child(1) {
+  margin-left: 0; /* 左側按鈕不留邊距 */
+}
+button:nth-child(2) {
+  margin-right: 0; /* 右側按鈕不留邊距 */
+}
+button:hover {
+  background-color: #ddd; /* 當鼠標懸停時，背景顏色變深 */
+}
+
+
+.carousel-container {
+  position: relative;
+  width: 1300px;
+  height: 800px;
+  overflow: hidden; /* 隱藏超出容器的內容 */
+}
+
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+img.hidden {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+img.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/*連結*/
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #928c65;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* 熱銷款式區域 */
+.hot-sale-section {
+  max-width: 1600px; /* 調整最大寬度，適合大多數螢幕 */
+  margin: 30px auto; /* 自動置中 */
+  padding: 20px; /* 增加內邊距 */
+  background-color: #edecec; /* 增加對比背景色 */
+  border-radius: 10px; /* 圓角樣式 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 添加陰影提升層次感 */
+}
+
+/* 標題區域 */
+.hot-sale-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.hot-sale-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* 熱銷商品網格 */
+.hot-sale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 響應式排列 */
+  gap: 20px; /* 每個卡片間距 */
+}
+
+.hot-sale-grid article h2{
+  color: #433b3b;
+}
+
+.hot-sale-grid article {
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f9f9f9; /* 卡片背景色 */
+  transition: all 0.3s ease; /* 添加過渡效果 */
+}
+
+.hot-sale-grid article:hover {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 卡片懸停時的陰影 */
+  transform: scale(1.05); /* 卡片放大效果 */
+}
+
+.hot-sale-grid article img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hot-sale-grid article h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.hot-sale-grid article p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+
+/* 商品款式區域 */
+.product-styles {
+  margin: 75px;
+  padding: 70px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+}
+
+.product-styles h1 {
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.product-styles h2 {
+  color: #433b3b;
+}
+
+.product-styles img {
+  width: 100%;
+  height: auto;
+}
+
+
+.styles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個商品 */
+  gap: 30px; /* 設置商品之間的間距 */
+}
+
+.styles-grid article {
+  background-color: #f0f0f0;
+  padding: 25px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease; /* 動畫效果 */
+  cursor: pointer;
+}
+
+.styles-grid article:hover {
+  transform: scale(1.05); /* 放大效果 */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.styles-grid article button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #928c65;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+/* 導航區域 */
+.view-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.view-more a {
+  text-decoration: none;
+  color: #928c65;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px; /* 控制區域寬度 */
+  margin: 0 auto; /* 使其水平居中 */
+}
+
+.footer-links .about-us,
+.footer-links .contact-us {
+  flex: 1;  /* 使兩個區塊平分空間 */
+  text-align: center; /* 讓文字居中 */
+}
+
+.footer-links .social {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.footer-links .social a {
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+
+.review-text {
+  font-family: 'Verdana', sans-serif;
+  color: #333;
+  display: inline-block; /* 確保星星和文字在同一行 */
+  margin-left: 8px; /* 可調整星星和文字間的間距 */
+}
+
+.review-stars {
+  font-size: 1.2em; /* 調整星星大小 */
+}
+

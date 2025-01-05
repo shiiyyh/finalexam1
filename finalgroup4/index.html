@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Souffle de Cinéma</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .hidden-products {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo"><img src="image/brand.png" alt="" /></div>
+      <div class="icons">
+        <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+        <!-- 搜尋商品 -->
+        <span class="dropdown">
+            👤
+            <div class="dropdown_menu">
+                <a href="profile.html">會員專區</a>
+                <a href="login.html">註冊/登入</a>
+            </div>
+        </span>
+        <!-- 登入鍵 -->
+            
+        <span><a href="shop.html">🛒</a></span>
+        <!-- 購物車 -->
+    </div>
+    </header>
+
+    <div class="product-info">
+      <h1>Souffle de Cinéma</h1>
+      <hr />
+
+      <!-- 導航區域 -->
+      <nav>
+        <ul>
+          <li><a href="neutral.html">中性香水</a></li>
+          <li><a href="woman.html">女士香水</a></li>
+          <li><a href="man.html">男士香水</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="carousel">
+      <button onclick="prevImage()">⇦</button>
+      <div class="carousel-container">
+        <a href="neutral.html"><img id="image1" src="image/1.png" class="visible"></a>
+        <a href="woman.html"><img id="image2" src="image/2.png" class="hidden"></a>
+      </div>
+      <button onclick="nextImage()">⇨</button>
+    </div>
+    <!-- 熱銷區塊 -->
+    <section class="hot-sale-section">
+      <div class="hot-sale-header">
+        <h2>熱銷商品</h2>
+      </div>
+
+      <div class="hot-sale-grid">
+        <article>
+          <h3>熱銷 1</h3>
+          <a href="amomestessa.html">
+            <h2>Amo me stessa</h2>
+            <img src="image/photo/S__596566024_0.jpg" alt="Amo me stessa" class="main-image" id="main-image" /><br />
+          </a>
+        </article>
+        <article>
+          <h3>熱銷 2</h3>
+          <a href="budapesthotel.html">
+            <h2>Budapest Hotel</h2>
+            <img src="image/photo/S__596566019_0.jpg" alt="Budapest Hotel" class="main-image" id="main-image" /><br />
+          </a>
+        </article>
+        <article>
+          <h3>熱銷 3</h3>
+          <a href="rain.html">
+            <h2>Rain</h2>
+            <img src="image\photo\S__596566023_0.jpg" alt="Rain" class="main-image" id="main-image" /><br />
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 商品款式區塊 -->
+    <section class="product-styles">
+      <h1>商品款式</h1>
+      <div class="styles-grid">
+        <article>
+          <a href="amomestessa.html">
+            <h2>Amo me stessa</h2>
+            <img src="image/photo/S__596566024_0.jpg" alt="Amo me stessa" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(1)">加入購物車</button>
+        </article>
+        <article>
+          <a href="budapesthotel.html">
+            <h2>Budapest Hotel</h2>
+            <img src="image/photo/S__596566019_0.jpg" alt="Budapest Hotel" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(2)">加入購物車</button>
+        </article>
+        <article>
+          <a href="happytogether.html">
+            <h2>Happy Together</h2>
+            <img src="image/photo/S__596566021_0.jpg" alt="Happy Together" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(3)">加入購物車</button>
+        </article>
+        <article>
+          <a href="lovewinsall.html">
+            <h2>Love wins all</h2>
+            <img src="image/photo/S__596566022_0.jpg" alt="Love wins all" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(4)">加入購物車</button>
+        </article>
+        <article>
+          <a href="summer.html">
+            <h2>Summer</h2>
+            <img src="image\photo\S__596566025_0.jpg" alt="Summer" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(5)">加入購物車</button>
+        </article>
+        <article>
+          <a href="septemberrobot.html">
+            <h2>September Robot</h2>
+            <img src="image\photo\S__596582412_0.jpg" alt="September Robot" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(6)">加入購物車</button>
+        </article>
+        <article>
+          <a href="perfectblue.html">
+            <h2>Perfect Blue</h2>
+            <img src="image\photo\S__596582410_0.jpg" alt="Perfect Blue" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(7)">加入購物車</button>
+        </article>
+        <article>
+          <a href="rain.html">
+            <h2>Rain</h2>
+            <img src="image\photo\S__596566023_0.jpg" alt="Rain" class="main-image" id="main-image" /><br />
+          </a>
+          <button onclick="addToCart(8)">加入購物車</button>
+        </article>
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <div class="about-us">
+          <p><a href="about-us.html">關於我們</a></p>
+        </div>
+        <div class="contact-us">
+          <p><strong>聯繫我們：</strong></p>
+          <div class="social">
+            <a href="https://www.instagram.com/yunting66/">IG</a>
+            <a href="https://www.facebook.com/share/q4Ed99CREq1cqYMz/?mibextid=wwXIfr">FB</a>
+            <a href="mailto:a0939908707@gmail.com">寄信給我們</a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 購物網站</p>
+    </footer>
+
+    <script>
+      // 自動輪播廣告圖片
+      const images = ["image/1.png", "image/2.png", "image/3.png", "image/4.png"];
+      let currentIndex = 0;
+      let isImage1Visible = true; // 判斷目前哪個圖片層顯示
+
+      const image1 = document.getElementById("image1");
+      const image2 = document.getElementById("image2");
+
+      function updateCarousel(next = true) {
+        const nextIndex = (currentIndex + (next ? 1 : -1) + images.length) % images.length;
+        const currentImage = isImage1Visible ? image1 : image2;
+        const nextImage = isImage1Visible ? image2 : image1;
+
+        // 更新下一張圖片的來源與狀態
+        nextImage.src = images[nextIndex];
+        nextImage.classList.remove("hidden");
+        nextImage.style.transform = next ? "translateX(100%)" : "translateX(-100%)"; // 初始位置
+
+        setTimeout(() => {
+          nextImage.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+          nextImage.style.transform = "translateX(0)"; // 滑入
+          nextImage.style.opacity = "1";
+
+          currentImage.style.transition = "opacity 0.5s ease";
+          currentImage.style.opacity = "0"; // 淡出
+        }, 50);
+
+        // 更新狀態
+        setTimeout(() => {
+          currentImage.classList.add("hidden");
+          isImage1Visible = !isImage1Visible;
+          currentIndex = nextIndex;
+        }, 500);
+      }
+
+      function nextImage() {
+        updateCarousel(true);
+      }
+
+      function prevImage() {
+        updateCarousel(false);
+      }
+
+      setInterval(nextImage, 4000);
+
+      document.addEventListener('DOMContentLoaded', function() {
+            const products = [
+                {
+                    id: 1,
+                    title:'Amo me stessa',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566024_0.jpg'
+                },
+                {
+                    id: 2,
+                    title: 'Budapest Hotel',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566019_0.jpg'
+                },
+                {
+                    id: 3,
+                    title: 'Happy Together',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566021_0.jpg'
+                },
+                {
+                    id: 4,
+                    title: 'Love wins all',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566022_0.jpg'
+                },
+                {
+                    id: 5,
+                    title: 'Summer',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566025_0.jpg'
+                },
+                {
+                    id: 6,
+                    title: 'September Robot',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596582412_0.jpg'
+                },
+                {
+                    id: 7,
+                    title: 'Perfect Blue',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596582410_0.jpg'
+                },
+                {
+                    id: 8,
+                    title: 'Rain',
+                    size: '50ML',
+                    price: 880,
+                    image: 'image/photo/S__596566023_0.jpg'
+                },
+            ];
+
+            window.addToCart = function(productId) {
+                const product = products.find(p => p.id === productId);
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const cartItem = { ...product, quantity: 1 }; // 預設數量為1
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert('商品已加入購物車');
+            };
+        });
+
+    </script>
+  </body>
+</html>

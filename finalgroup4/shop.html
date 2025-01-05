@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>購物車</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="image/brand.png" alt="" /></div>
+        <div class="icons">
+          <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+          <!-- 搜尋商品 -->
+          <span class="dropdown">
+              👤
+              <div class="dropdown_menu">
+                  <a href="profile.html">會員專區</a>
+                  <a href="login.html">註冊/登入</a>
+              </div>
+          </span>
+          <!-- 登入鍵 -->
+              
+          <span><a href="shop.html">🛒</a></span>
+          <!-- 購物車 -->
+      </div>
+      </header>
+      <a href="index.html" class="back-home">回首頁</a>
+      <div class="cart">
+        <div id="cart-items">
+          <!-- 這裡會動態插入商品 -->
+        </div>
+        <p id="empty-cart-message">還沒選擇東西</p>
+  <div id="total-price">總金額：NT$0</div>
+  <button id="checkout-button">直接結帳</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const totalPriceElement = document.getElementById('total-price');
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+      if (cart.length === 0) {
+        emptyCartMessage.style.display = 'block';
+      } else {
+        emptyCartMessage.style.display = 'none';
+        let total = 0;
+        cart.forEach((item, index) => {
+          const cartItem = document.createElement('div');
+          cartItem.className = 'cart-item';
+          cartItem.dataset.price = item.price;
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" class="item-image">
+            <div class="item-details">
+              <p class="item-title">${item.title}</p>
+              <p class="item-spec">規格：${item.size}</p>
+              <p class="item-price">價格: NT$${item.price}</p>
+              <p class="item-quantity">數量: ${item.quantity}</p>
+              <button class="remove-item" onclick="removeFromCart(${index})">取消</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(cartItem);
+          total += item.price * item.quantity;
+        });
+        totalPriceElement.textContent = `總金額：NT$${total}`;
+      }
+    
+      window.removeFromCart = function(index) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        location.reload(); // 重新加載頁面以更新購物車顯示
+      }
+    
+      document.getElementById('checkout-button').addEventListener('click', function() {
+        if (cart.length === 0) {
+          alert('購物車是空的，無法結帳');
+          return;
+        }
+        localStorage.setItem('checkoutCart', JSON.stringify(cart));
+        window.location.href = 'order-confirmation.html';
+      });
+    });
+    </script>

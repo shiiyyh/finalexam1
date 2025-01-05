@@ -1,0 +1,251 @@
+.back-home {
+    display: block;
+    margin: 20px #fffaf4;
+    font-size: 16px;
+    background-color: #fffaf4;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #828281;
+    border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .logo img {
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+  
+header .icons {
+    display: flex;
+    gap: 15px;
+}
+  
+header .icons span {
+    cursor: pointer;
+}
+
+/* 隱藏的下拉選單 */
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 20px; /* 距圖片的距離 */
+    right: 0px;
+    background-color: white;
+    box-shadow: 0px 4px 8px #3C3C3C;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  /* 下拉選單內部的項目 */
+  .dropdown_menu a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .dropdown_menu a:hover {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+  
+  /* 滑鼠移到圖片時顯示下拉選單 */
+  .dropdown:hover .dropdown_menu {
+    display: block;
+  }
+
+.tab-container {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px #272727;
+    overflow: hidden;
+}
+
+.biggroup {
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tabs {
+    display: flex;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D0D0D0;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.tabs button.active { /*表示當前選中或啟用的頁籤*/
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #3C3C3C;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.form-group {
+    position: relative;
+    width: 100%;
+    max-width: 3000px; 
+    margin: 15px auto;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #F0F0F0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.agreement label {
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    white-space: nowrap; /* 防止文字換行 */
+    font-size: 14px;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.social-login button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.social-login .line {
+    background-color: #FFFFFF;
+    color: black;
+    border:  1px solid #948383;
+}
+
+.social-login .FB {
+    background-color: #FFFFFF;
+    color: black;
+    border:  1px solid #948383;
+}
+
+.form-group label {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.login-button a {
+text-decoration: none;
+color: white; 
+}
+
+.login-button:hover {
+background-color: #3C3C3C; 
+}
+
+.login-button {
+width: 100%;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+background-color: #3C3C3C;
+color: #FFFFFF;
+font-size: 16px;
+cursor: pointer;
+}
+
+.or {
+    text-align: center;
+    color: #ADADAD;
+}
+
+.forget {
+    text-decoration: underline;
+    text-align: right;
+}
+
+.password-toggle {
+    position: relative; 
+    width: 100%;
+    max-width: 3000px; 
+    margin: 15px auto; 
+}
+
+.password-toggle input {
+    width: 100%; 
+    padding-right: 60px; 
+    padding: 10px;
+    border: 1px solid #F0F0F0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.password-toggle button {
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); /* 修正置中偏移 */
+    background: transparent;
+    border: none; 
+    color: #ADADAD; 
+    font-size: 14px; 
+}
+
+.password-toggle button:hover {
+    color: #796400;
+}
+
+/* 其他現有的樣式... */
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.profile-info p {
+    margin: 10px 0;
+}

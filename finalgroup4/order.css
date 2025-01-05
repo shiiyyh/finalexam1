@@ -1,0 +1,187 @@
+/* 隱藏的下拉選單 */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  top: 20px; /* 距圖片的距離 */
+  right: 0px;
+  background-color: white;
+  box-shadow: 0px 4px 8px #3C3C3C;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* 下拉選單內部的項目 */
+.dropdown_menu a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown_menu a:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* 滑鼠移到圖片時顯示下拉選單 */
+.dropdown:hover .dropdown_menu {
+  display: block;
+}
+
+body {
+  background-color: #fffaf4; 
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+  margin-right: 200px; /* 減少右邊留白 */
+}
+
+.box {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#order-summary {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#order-summary h2 {
+  margin-top: 0;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group select,
+.input-group input,
+.input-group textarea {
+  width: 90%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 5px; /* 調整單選按鈕和標籤之間的間距 */
+}
+
+.radio-group label {
+  white-space: nowrap; /* 確保文字不換行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.payment-buttons {
+  display: flex;
+  justify-content: flex-start; /* 將付款按鈕靠左對齊 */
+}
+
+.payment-button {
+  flex: 1;
+  padding: 10px;
+  margin: 0 5px;
+  background-color: #928c65;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.payment-button:hover {
+  background-color: #928c65;
+  transform: scale(1.05);
+}
+
+.payment-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #656145;
+}
+
+.blue-button {
+  background-color: #928c65;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.blue-button:hover {
+  background-color: #656145;
+  transform: scale(1.05);
+}
+
+.blue-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #656145;
+}
+
+.cancel-button,
+.submit-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cancel-button:hover,
+.submit-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.cancel-button:focus,
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+#remarks-info textarea {
+  width: 90%;
+  height: 100px; /* 調整備註輸入框的高度 */
+  resize: vertical; /* 允許垂直調整大小 */
+}

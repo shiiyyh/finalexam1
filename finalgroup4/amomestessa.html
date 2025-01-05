@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>男性香水</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    /* 預設隱藏「使用建議」與「評價」區塊 */
+    #recommendations, #reviews {
+      display: none;
+    }
+    .description-nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+    }
+    .description-nav a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="image/brand.png" alt="" /></div>
+    <div class="icons">
+      <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+      <span class="dropdown">
+          👤
+          <div class="dropdown_menu">
+              <a href="profile.html">會員專區</a>
+              <a href="login.html">註冊/登入</a>
+          </div>
+      </span>
+      <span><a href="shop.html">🛒</a></span>
+    </div>
+  </header>
+  <a href="index.html" class="back-home">回首頁</a>
+
+  <div class="product-container">
+    <div class="product-images">
+      <img src="image/photo/S__596566024_0.jpg" alt="Amo me stessa" class="main-image">
+    </div>
+
+    <div class="product-details">
+      <h1>Amo me stessa</h1>
+      <p class="price">NT$<span id="price">680</span></p>
+      <div class="size-options">
+        <label for="size">規格：</label>
+        <select id="size" name="size">
+          <option value="30ml" data-price="680">30ML</option>
+          <option value="50ml" data-price="880">50ML</option>
+        </select>
+      </div>
+      <div class="quantity">
+        <label for="quantity">數量：</label>
+        <input type="number" value="1" min="1" class="quantity-input" id="quantity">
+      </div>
+      <div class="actions">
+        <button class="add-to-cart" id="add-to-cart">加入購物車</button>
+        <button class="buy-now" id="buy-now">直接購買</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-description">
+    <nav class="description-nav">
+      <a href="#description" data-target="description" class="active">商品描述</a>
+      <a href="#recommendations" data-target="recommendations">使用建議</a>
+      <a href="#reviews" data-target="reviews">評價</a>
+    </nav>
+    <section id="description">
+      <h2>商品描述</h2>
+      <p><strong>香調：柚子、茉莉、苔蘚、草</strong></p>
+      <p>彷彿置身義大利都靈（Turin）這城市清新的柚子與茉莉的點綴蘚苔是意外邂逅的躁動<br>
+        總有人未經你同意就闖入你的世界阻止不了你對這世界好奇、渴望的同時也懂的好好「愛自己。」</p>
+    </section>
+    <section id="recommendations">
+      <h2>使用建議</h2>
+      <p>適合日常使用、戶外活動或輕鬆旅行場合。</p>
+    </section>
+    <section id="reviews">
+      <h2>評價</h2>
+      <div class="reviews">
+        <p><span class="stars">★★★★★</span>「噴這款香水讓自己的魅力更加提升。」 - Adam616</p>
+        <p><span class="stars">★★★★☆</span>「柚子的清新和茉莉的柔和，帶出一種自然的溫暖感。」- Jason2882</p>
+        <p><span class="stars">★★★★★</span>「苔蘚的微微泥土氣息，讓人覺得踏實又平靜。」- Ethan568</p>
+        <p><span class="stars">★★★★★</span>「一款充滿正能量的香水，像是在提醒自己要愛自己。」- Daniel911</p>
+        <p><span class="stars">★★★★☆</span>「草木香氣很適合春夏季節，簡單而純粹。」- Ryan248</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('.description-nav a');
+    const sections = document.querySelectorAll('.product-description section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        navLinks.forEach(nav => nav.classList.remove('active'));
+        sections.forEach(section => section.style.display = 'none');
+
+        const target = document.getElementById(this.dataset.target);
+        target.style.display = 'block';
+        this.classList.add('active');
+      });
+    });
+
+    document.getElementById('description').style.display = 'block';
+
+    const sizeSelect = document.getElementById('size');
+    const priceElement = document.getElementById('price');
+    const quantityInput = document.getElementById('quantity');
+    const addToCartButton = document.getElementById('add-to-cart');
+    const buyNowButton = document.getElementById('buy-now');
+
+    sizeSelect.addEventListener('change', () => {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const newPrice = selectedOption.getAttribute('data-price');
+      priceElement.textContent = newPrice;
+    });
+
+    addToCartButton.addEventListener('click', function() {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const price = selectedOption.getAttribute('data-price');
+      const size = selectedOption.value;
+      const quantity = quantityInput.value;
+      const image = document.querySelector('.main-image').src;
+
+      const product = {
+        image: image,
+        title: "Amo me stessa",
+        size: size,
+        price: price,
+        quantity: quantity
+      };
+
+      let cart = localStorage.getItem('cart');
+      if (cart) {
+        cart = JSON.parse(cart);
+      } else {
+        cart = [];
+      }
+
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert('商品已加入購物車');
+    });
+
+    buyNowButton.addEventListener('click', function() {
+      const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+      const price = selectedOption.getAttribute('data-price');
+      const size = selectedOption.value;
+      const quantity = quantityInput.value;
+      const image = document.querySelector('.main-image').src;
+
+      const product = {
+        image: image,
+        title: "Amo me stessa",
+        size: size,
+        price: price,
+        quantity: quantity
+      };
+
+      localStorage.setItem('buyNowProduct', JSON.stringify(product));
+      window.location.href = 'order-confirmation.html';
+    });
+  </script>
+</body>
+</html>

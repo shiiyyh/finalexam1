@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="order.css">
+    <title>訂單確認</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #828281;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header .logo img {
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+
+        header .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        header .icons span {
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .box {
+            border: 1px solid #ccc;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .blue-button {
+            color: white;
+            background-color: #aca676;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .item-image {
+            width: 150px; /* 固定寬度 */
+            height: 150px; /* 固定高度 */
+            object-fit: cover; /* 確保圖片填充區域 */
+        }
+
+        .order-item {
+            display: flex; /* 將子項水平排列 */
+            align-items: center; /* 垂直方向置中 */
+            gap: 15px; /* 圖片和文字之間的間距 */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="image/brand.png" alt="" /></div>
+        <div class="icons">
+            <span><input type="search" placeholder="搜尋關鍵字...">🔍</span>
+            <!-- 搜尋商品 -->
+            <span class="dropdown">
+                👤
+                <div class="dropdown_menu">
+                    <a href="profile.html">會員專區</a>
+                    <a href="login.html">註冊/登入</a>
+                </div>
+            </span>
+            <!-- 登入鍵 -->
+                
+            <span><a href="shop.html">🛒</a></span>
+            <!-- 購物車 -->
+        </div>
+    </header>
+    <a href="index.html" class="back-home">回首頁</a>
+    <div class="container">
+
+        <main>
+            <h1>訂單確認</h1>
+            <div id="orderDetails"></div>
+            <div id="order-items"></div>
+            <div class="box" id="product-info">
+            <!-- 商品資訊將會插入到這裡 -->
+        </div>
+        <div class="box" id="shipping-info">
+            <h2>運送資訊</h2>
+            <div class="input-group">
+                <label for="store">選擇取貨方式</label>
+                <select id="store" onchange="updateStoreInput()">
+                    <option value="">請選擇</option>
+                    <option value="711">711</option>
+                    <option value="全家">全家</option>
+                    <option value="OK">OK</option>
+                </select>
+            </div>
+
+            <div class="input-group hidden" id="store-address-group">
+                <label for="store-address">門店地址</label>
+                <input type="text" id="store-address" placeholder="請輸入門店地址">
+            </div>
+
+            <div class="input-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" placeholder="請輸入姓名">
+            </div>
+
+            <div class="input-group">
+                <label for="phone">電話</label>
+                <input type="text" id="phone" placeholder="請輸入電話">
+            </div>
+        </div>
+
+        <div class="box" id="coupon-info">
+            <h2>優惠券</h2>
+            <div class="input-group">
+                <label for="coupon">選擇優惠券</label>
+                <select id="coupon" onchange="updateDiscount()">
+                    <option value="0">請選擇</option>
+                    <option value="50" data-threshold="1000">滿1000減50</option>
+                    <option value="120" data-threshold="2000">滿2000減120</option>
+                    <option value="200" data-threshold="3000">滿3000減200</option>
+                </select>
+            </div>
+        </div>
+        <div class="box" id="payment-method">
+            <h2>付款方法</h2>
+            <div class="input-group">
+                <label for="payment">選擇付款方式</label>
+                <select id="payment" onchange="updatePaymentInput()">
+                    <option value="">請選擇</option>
+                    <option value="貨付">貨付</option>
+                    <option value="VISA">VISA</option>
+                    <option value="宅配">宅配</option>
+                </select>
+            </div>
+            <div class="input-group hidden" id="payment-account-group">
+                <label>付款帳戶</label>
+                    <div class="radio-group">
+                        <input type="radio" id="account-ctbc" name="payment-account" value="中信" onchange="updateAccountInput()">
+                        <label for="account-ctbc">中信銀行</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="account-post" name="payment-account" value="郵政" onchange="updateAccountInput()">
+                        <label for="account-post">郵政儲金</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="account-taishin" name="payment-account" value="台新" onchange="updateAccountInput()">
+                        <label for="account-taishin">台新銀行</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="account-new" name="payment-account" value="新增" onchange="updateAccountInput()">
+                        <label for="account-new">新增帳戶</label>
+                    </div>
+                </div>
+            <div class="input-group hidden" id="bank-account-group">
+                <label for="bank-account">銀行帳戶</label>
+                <input type="text" id="bank-account" placeholder="請輸入銀行帳戶">
+            </div>
+        </div>
+        <div class="box" id="invoice-info">
+            <h2>發票資訊</h2>
+            <div class="input-group">
+                <label for="invoice">選擇發票方式</label>
+                <select id="invoice">
+                    <option value="">請選擇</option>
+                    <option value="會員載具">會員載具</option>
+                    <option value="手機條碼載具">手機條碼載具</option>
+                    <option value="隨貨附發票">隨貨附發票</option>
+                    <option value="公司統編發票">公司統編發票</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="box" id="remark">
+            <h2>備註</h2>
+            <textarea id="remark-text" rows="4" style="width: 100%;" placeholder="請輸入備註..."></textarea>
+        </div>
+
+        <div class="box" id="order-summary">
+            <h2>訂單摘要</h2>
+            <div id="product-summary">
+                <!-- 商品摘要將會插入到這裡 -->
+            </div>
+            <p>商品總金額: <span id="total-amount">NT$0</span></p>
+                <p>運費: <span id="shipping-fee">免運費</span></p>
+                <p>優惠金額: <span id="discount-amount">NT$0</span></p>
+                <p>總計: <span id="final-total">NT$0</span></p>
+        </div>
+
+        <div class="box" id="final-total-box">
+            <h2>總計</h2>
+            <p><span id="final-amount">$0</span></p>
+            <button class="blue-button" onclick="submitOrder()">送出訂單</button>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productInfo = JSON.parse(localStorage.getItem('buyNowProduct'));
+        const cartData = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+        const productInfoDiv = document.getElementById('product-info');
+        const productSummaryDiv = document.getElementById('product-summary');
+        let totalPrice = 0;
+
+        // 顯示購物車數據
+        if (cartData.length > 0) {
+                cartData.forEach((item, index) => {
+                    productInfoDiv.innerHTML += `
+                        <img src="${item.image}" alt="${item.title}" class="product-image">
+                        <p>名稱: ${item.title}</p>
+                        <p>規格: ${item.size}</p>
+                        <p>價格: ${item.price}</p>
+                        <p>數量: ${item.quantity}</p>
+                        <button onclick="removeFromCart(${index})">取消商品</button>
+                    `;
+
+                    productSummaryDiv.innerHTML += `
+                        <img src="${item.image}" alt="${item.title}" class="product-image">
+                        <p>名稱: ${item.title}</p>
+                        <p>規格: ${item.size}</p>
+                        <p>價格: ${item.price}</p>
+                        <p>數量: ${item.quantity}</p>
+                        <button onclick="removeFromCart(${index})">取消商品</button>
+                    `;
+                    totalPrice += item.price * item.quantity;
+                });
+            }
+
+            // 顯示直接購買的數據
+            if (productInfo) {
+                productInfoDiv.innerHTML += `
+                    <img src="${productInfo.image}" alt="${productInfo.title}" class="product-image">
+                    <p>名稱: ${productInfo.title}</p>
+                    <p>規格: ${productInfo.size}</p>
+                    <p>價格: ${productInfo.price}</p>
+                    <p>數量: ${productInfo.quantity}</p>
+                    <button onclick="removeBuyNowProduct()">取消商品</button>
+                `;
+
+                productSummaryDiv.innerHTML += `
+                    <img src="${productInfo.image}" alt="${productInfo.title}" class="product-image">
+                    <p>名稱: ${productInfo.title}</p>
+                    <p>規格: ${productInfo.size}</p>
+                    <p>價格: ${productInfo.price}</p>
+                    <p>數量: ${productInfo.quantity}</p>
+                    <button onclick="removeBuyNowProduct()">取消商品</button>
+                `;
+                totalPrice += productInfo.price * productInfo.quantity;
+            }
+
+        document.getElementById('total-amount').textContent = `NT$${totalPrice}`;
+        document.getElementById('final-amount').textContent = `NT$${totalPrice}`;
+        document.getElementById('final-total').textContent = `NT$${totalPrice}`;
+
+        if (!cartData.length && !productInfo) {
+            productInfoDiv.innerHTML = '<p>沒有找到訂單數據。</p>';
+        }
+    });
+        
+    function removeFromCart(index) {
+            const cartData = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+            cartData.splice(index, 1);
+            localStorage.setItem('checkoutCart', JSON.stringify(cartData));
+            location.reload();
+        }
+
+        function removeBuyNowProduct() {
+            localStorage.removeItem('buyNowProduct');
+            location.reload();
+        }
+
+        function updateStoreInput() {
+            const store = document.getElementById('store').value;
+            // 更新商店輸入的邏輯
+        }
+
+        function updateStoreInput() {
+            const store = document.getElementById('store').value;
+            const storeAddressGroup = document.getElementById('store-address-group');
+            const storeAddressInput = document.getElementById('store-address');
+
+            if (store) {
+                storeAddressGroup.classList.remove('hidden');
+                storeAddressInput.placeholder = `請輸入${store}門店地址`;
+            } else {
+                storeAddressGroup.classList.add('hidden');
+                storeAddressInput.value = '';
+            }
+        }
+
+        function updateDiscount() {
+            const couponSelect = document.getElementById('coupon');
+            const selectedOption = couponSelect.options[couponSelect.selectedIndex];
+            const discount = parseInt(selectedOption.value);
+            const threshold = parseInt(selectedOption.getAttribute('data-threshold'));
+
+            const totalAmountElement = document.getElementById('total-amount');
+            const totalAmount = parseInt(totalAmountElement.textContent.replace('NT$', ''));
+
+            let discountAmount = 0;
+            if (totalAmount >= threshold) {
+                discountAmount = discount;
+            }
+
+            document.getElementById('discount-amount').textContent = `NT$${discountAmount}`;
+            const finalTotal = totalAmount - discountAmount;
+            document.getElementById('final-total').textContent = `NT$${finalTotal}`;
+            document.getElementById('final-amount').textContent = `NT$${finalTotal}`;
+        }
+
+        function updatePaymentInput() {
+            const payment = document.getElementById('payment').value;
+            const paymentAccountGroup = document.getElementById('payment-account-group');
+            const bankAccountGroup = document.getElementById('bank-account-group');
+
+            if (payment === 'VISA' || payment === '宅配') {
+                paymentAccountGroup.classList.remove('hidden');
+                bankAccountGroup.classList.remove('hidden');
+            } else {
+                paymentAccountGroup.classList.add('hidden');
+                bankAccountGroup.classList.add('hidden');
+            }
+        }
+
+        function updateAccountInput() {
+            const paymentAccount = document.querySelector('input[name="payment-account"]:checked').value;
+            const accountNumberGroup = document.getElementById('account-number-group');
+
+            if (paymentAccount === '中信' || paymentAccount === '郵政' || paymentAccount === '台新' || paymentAccount === '新增') {
+                accountNumberGroup.classList.remove('hidden');
+            } else {
+                accountNumberGroup.classList.add('hidden');
+            }
+        }
+        
+        
+        function clearLocalStorage() {
+            // 清除所有 localStorage 數據
+            localStorage.clear();
+        }
+
+        function submitOrder() {
+            // 送出訂單的邏輯
+            localStorage.removeItem('checkoutCart'); // 清除購物車數據
+            localStorage.removeItem('buyNowProduct'); // 清除直接購買數據
+            clearLocalStorage(); // 清除所有 localStorage 數據
+            window.location.href = 'order-done.html';
+        }
+    </script>
+</body>
+</html>
